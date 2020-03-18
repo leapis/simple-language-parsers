@@ -1,3 +1,2 @@
 rock paper;
-paper scissors;
 rock rock

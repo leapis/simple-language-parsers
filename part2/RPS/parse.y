@@ -13,10 +13,10 @@ stmtlist : stmtlist ';' stmtw {  }
          | stmtw {  }
          ;
 
-stmtw : stmt {printf ("starting");}
+stmtw : stmt {printf ("starting%d",$1);}
 
-stmt : ROCK ROCK         { printf("tie"); }
-    | ROCK PAPER        { printf("paper wins"); }
+stmt : ROCK ROCK         { printf("tie"); $$ = 1;}
+    | ROCK PAPER        { printf("paper wins"); $$=2;}
     | ROCK SCISSORS     { printf("rock wins"); }
     | PAPER ROCK        { printf("paper wins"); }
     | PAPER PAPER       { printf("tie"); }
