@@ -11,6 +11,7 @@ void yyerror(char * s);
 %left XOR
 %left LOR
 %left LAND
+%left NOT
 
 %%
 program : expr '.' {printf("result= %d\n", $1); return 0;}
