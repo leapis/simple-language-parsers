@@ -14,11 +14,11 @@ program : expr '.' {printf("result= %d", $1);};
 
 expr : ROCK ROCK         { printf("tie"); $$ = 1;}
     | ROCK PAPER        { printf("paper wins"); $$=2;}
-    | bool bool {$$ = $1 + $2}
+    | bool bool {$$ = $1 + $2;}
     ;
 
-bool : TRUE {$$ = 1}
-    | FALSE {$$ = 0}
+bool : TRUE {$$ = 1;}
+    | FALSE {$$ = 0;}
     ;
 %%
 
