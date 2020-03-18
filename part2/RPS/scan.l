@@ -7,9 +7,10 @@
     extern int isatty();
 
 %%
-rock {return ROCK;}
-paper {return PAPER;}
-scissors {return SCISSORS;}
+\|\| {return LOR;}
+&& {return LAND;}
+~ {return NOT;}
+\^ {return XOR;}
 T {return TRUE;}
 F {return FALSE;}
 [ \t] ;//ignore

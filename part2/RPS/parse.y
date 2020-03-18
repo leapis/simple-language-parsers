@@ -4,22 +4,30 @@ int yylex();
 void yyerror(char * s);
 %}
 
-%token ROCK PAPER SCISSORS TRUE FALSE
+%token TRUE FALSE LAND LOR NOT XOR
 
 %start program
 
+%left XOR
+%left LOR
+%left LAND
+
 %%
-program : expr {printf("result= %d", $1);};
+program : expr '.' {printf("result= %d\n", $1); return 0;}
+        ;
 
 
-expr : ROCK ROCK         { printf("tie"); $$ = 1;}
-    | ROCK PAPER        { printf("paper wins"); $$=2;}
-    | bool bool {$$ = $1 + $2;}
-    ;
+expr : expr LAND expr {$$ = $1 && $3;}
+     | expr LOR expr {$$ = $1 || $3;}
+     | expr XOR expr {$$ = $1 ^ $3;}
+     | NOT expr {$$ = !$2;}
+     | '(' expr ')' {$$ = $2;}
+     | bool {$$ = $1;}
+     ;
 
 bool : TRUE {$$ = 1;}
-    | FALSE {$$ = 0;}
-    ;
+     | FALSE {$$ = 0;}
+     ;
 %%
 
 void yyerror(char* s) {
