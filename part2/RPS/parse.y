@@ -9,7 +9,7 @@ void yyerror(char * s);
 %start program
 
 %%
-program : expr. {printf("result= %d", $1);};
+program : expr '.' {printf("result= %d", $1);};
 
 
 expr : ROCK ROCK         { printf("tie"); $$ = 1;}
