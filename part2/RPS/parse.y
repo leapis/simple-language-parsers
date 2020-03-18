@@ -6,7 +6,7 @@ void yyerror(char * s);
 
 %token ROCK PAPER SCISSORS TRUE FALSE
 
-%start stmtlist
+%start program
 
 %%
 program : expr. {printf("result= %d", $1);};
