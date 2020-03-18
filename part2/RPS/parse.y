@@ -1,15 +1,10 @@
 %{
 #include <stdio.h>
-#include "attr.h"
 int yylex();
 void yyerror(char * s);
 %}
 
-%union {
-    RpsType rpsType;
-}
-
-%token <rpsType> RPS
+%token ROCK PAPER SCISSORS
 
 %start stmtlist
 
@@ -18,28 +13,15 @@ stmtlist : stmtlist ';' stmt {  }
          | stmt {  }
          ;
 
-stmt : RPS RPS {
-    if ($1.r) {
-        if ($2.r)
-            printf("tie");
-        else if ($2.p)
-            printf("paper wins");
-        else if ($2.s)
-            printf("rock wins");
-    }
-    else if ($1.p) {
-        if ($2.r) printf("paper wins");
-        else if ($2.s) printf("scissors wins");
-        else if ($2.p) printf("tie");
-    }
-    else if ($1.s) {
-        if ($2.r) printf("rock wins");
-        else if ($2.s) printf("tie");
-        else if ($2.p) printf("scissors wins");
-        
-    } 
-    }
-    ;
+    stmt : ROCK ROCK         { printf("tie"); }
+    | ROCK PAPER        { printf("paper wins"); }
+    | ROCK SCISSORS     { printf("rock wins"); }
+    | PAPER ROCK        { printf("paper wins"); }
+    | PAPER PAPER       { printf("tie"); }
+    | PAPER SCISSORS    { printf("scissors win"); }
+    | SCISSORS ROCK     { printf("rock wins"); }
+    | SCISSORS PAPER    { printf("scissors wins"); }
+    | SCISSORS SCISSORS { printf("tie"); };}
 %%
 
 void yyerror(char* s) {
