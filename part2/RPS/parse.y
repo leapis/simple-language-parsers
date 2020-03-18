@@ -9,9 +9,11 @@ void yyerror(char * s);
 %start stmtlist
 
 %%
-stmtlist : stmtlist ';' stmt {  }
-         | stmt {  }
+stmtlist : stmtlist ';' stmtw {  }
+         | stmtw {  }
          ;
+
+stmtw : stmt {printf ("starting")}
 
 stmt : ROCK ROCK         { printf("tie"); }
     | ROCK PAPER        { printf("paper wins"); }
