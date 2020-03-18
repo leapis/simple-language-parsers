@@ -1,2 +1,1 @@
-rock paper;
-rock rock
+rock rock.

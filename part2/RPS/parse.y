@@ -4,18 +4,15 @@ int yylex();
 void yyerror(char * s);
 %}
 
-%token ROCK PAPER SCISSORS
+%token ROCK PAPER SCISSORS TRUE FALSE
 
 %start stmtlist
 
 %%
-stmtlist : stmtlist ';' stmtw {  }
-         | stmtw {  }
-         ;
+program : expr. {printf("result= %d", $1);};
 
-stmtw : stmt {printf ("starting%d",$1);}
 
-stmt : ROCK ROCK         { printf("tie"); $$ = 1;}
+expr : ROCK ROCK         { printf("tie"); $$ = 1;}
     | ROCK PAPER        { printf("paper wins"); $$=2;}
     | ROCK SCISSORS     { printf("rock wins"); }
     | PAPER ROCK        { printf("paper wins"); }
