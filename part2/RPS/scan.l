@@ -11,5 +11,5 @@ rock {return ROCK;}
 paper {return PAPER;}
 scissors {return SCISSORS;}
 [ \t] ;//ignore
-.  {return yytext[0]}
+.  {return yytext[0]; }
 %%
