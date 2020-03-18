@@ -14,7 +14,12 @@ void yyerror(char * s);
 %left NOT
 
 %%
-program : expr '.' {printf("result= %d\n", $1); return 0;}
+program : expr '.' {
+        if ($1 == 1)
+            printf("T\n");
+        else
+            printf("F\n");
+        return 0;}
         ;
 
 
