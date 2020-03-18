@@ -13,7 +13,7 @@ stmtlist : stmtlist ';' stmt {  }
          | stmt {  }
          ;
 
-    stmt : ROCK ROCK         { printf("tie"); }
+stmt : ROCK ROCK         { printf("tie"); }
     | ROCK PAPER        { printf("paper wins"); }
     | ROCK SCISSORS     { printf("rock wins"); }
     | PAPER ROCK        { printf("paper wins"); }

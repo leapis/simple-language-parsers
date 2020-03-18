@@ -8,10 +8,10 @@ default: rps
 rps: ${OBJ}
 		${CC} ${CFLAGS} ${OBJ} -o rps
 
-lex.yy.c: scan.l parse.tab.h attr.h
+lex.yy.c: scan.l parse.tab.h
 	flex -i scan.l
 
-parse.tab.c: parse.y attr.h
+parse.tab.c: parse.y
 	bison -dv parse.y
 
 parse.tab.h: parse.tab.c
