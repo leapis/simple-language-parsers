@@ -21,7 +21,8 @@ stmtlist : stmtlist ';' stmt {  }
     | PAPER SCISSORS    { printf("scissors win"); }
     | SCISSORS ROCK     { printf("rock wins"); }
     | SCISSORS PAPER    { printf("scissors wins"); }
-    | SCISSORS SCISSORS { printf("tie"); };}
+    | SCISSORS SCISSORS { printf("tie"); }
+    ;
 %%
 
 void yyerror(char* s) {
