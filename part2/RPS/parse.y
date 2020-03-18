@@ -14,13 +14,11 @@ program : expr '.' {printf("result= %d", $1);};
 
 expr : ROCK ROCK         { printf("tie"); $$ = 1;}
     | ROCK PAPER        { printf("paper wins"); $$=2;}
-    | ROCK SCISSORS     { printf("rock wins"); }
-    | PAPER ROCK        { printf("paper wins"); }
-    | PAPER PAPER       { printf("tie"); }
-    | PAPER SCISSORS    { printf("scissors win"); }
-    | SCISSORS ROCK     { printf("rock wins"); }
-    | SCISSORS PAPER    { printf("scissors wins"); }
-    | SCISSORS SCISSORS { printf("tie"); }
+    | bool bool {$$ = $1 + $2}
+    ;
+
+bool : TRUE {$$ = 1}
+    | FALSE {$$ = 0}
     ;
 %%
 
