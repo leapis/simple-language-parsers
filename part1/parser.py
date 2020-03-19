@@ -1,9 +1,9 @@
 import argparse
 
-SPEC_LOGGING = True
+SPEC_LOGGING = False #detailed error messages
 
 class Parser:
-    
+
     def __init__(self, input):
         self.input = input.strip()
         self.runtime_err = False
@@ -22,7 +22,6 @@ class Parser:
         elif self.runtime_err:
             print('exception')
         else:
-            print("out:")
             print(self.buffer)
 
     def program(self):
@@ -42,7 +41,7 @@ class Parser:
         else:
             self.syntax_err('stmt_list')
             return False
-    
+
     def getC(self, index=0):
         return self.input[index]
 
@@ -116,7 +115,7 @@ class Parser:
 
     def expr(self): #returns an int
         nxt = self.getC()
-        if nxt in ['+', '-', '*', '/']: 
+        if nxt in ['+', '-', '*', '/']:
             self.shiftR()
             if nxt == '+': return int( self.getVal(self.expr()) + self.getVal(self.expr()) )
             if nxt == '-': return int( self.getVal(self.expr()) - self.getVal(self.expr()) )

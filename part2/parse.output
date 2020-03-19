@@ -1,0 +1,241 @@
+Grammar
+
+    0 $accept: program $end
+
+    1 program: expr '.'
+
+    2 expr: expr LAND expr
+    3     | expr LOR expr
+    4     | expr XOR expr
+    5     | NOT expr
+    6     | '(' expr ')'
+    7     | bool
+
+    8 bool: TRUE
+    9     | FALSE
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+'(' (40) 6
+')' (41) 6
+'.' (46) 1
+error (256)
+TRUE (258) 8
+FALSE (259) 9
+LAND (260) 2
+LOR (261) 3
+NOT (262) 5
+XOR (263) 4
+
+
+Nonterminals, with rules where they appear
+
+$accept (12)
+    on left: 0
+program (13)
+    on left: 1, on right: 0
+expr (14)
+    on left: 2 3 4 5 6 7, on right: 1 2 3 4 5 6
+bool (15)
+    on left: 8 9, on right: 7
+
+
+State 0
+
+    0 $accept: . program $end
+
+    TRUE   shift, and go to state 1
+    FALSE  shift, and go to state 2
+    NOT    shift, and go to state 3
+    '('    shift, and go to state 4
+
+    program  go to state 5
+    expr     go to state 6
+    bool     go to state 7
+
+
+State 1
+
+    8 bool: TRUE .
+
+    $default  reduce using rule 8 (bool)
+
+
+State 2
+
+    9 bool: FALSE .
+
+    $default  reduce using rule 9 (bool)
+
+
+State 3
+
+    5 expr: NOT . expr
+
+    TRUE   shift, and go to state 1
+    FALSE  shift, and go to state 2
+    NOT    shift, and go to state 3
+    '('    shift, and go to state 4
+
+    expr  go to state 8
+    bool  go to state 7
+
+
+State 4
+
+    6 expr: '(' . expr ')'
+
+    TRUE   shift, and go to state 1
+    FALSE  shift, and go to state 2
+    NOT    shift, and go to state 3
+    '('    shift, and go to state 4
+
+    expr  go to state 9
+    bool  go to state 7
+
+
+State 5
+
+    0 $accept: program . $end
+
+    $end  shift, and go to state 10
+
+
+State 6
+
+    1 program: expr . '.'
+    2 expr: expr . LAND expr
+    3     | expr . LOR expr
+    4     | expr . XOR expr
+
+    LAND  shift, and go to state 11
+    LOR   shift, and go to state 12
+    XOR   shift, and go to state 13
+    '.'   shift, and go to state 14
+
+
+State 7
+
+    7 expr: bool .
+
+    $default  reduce using rule 7 (expr)
+
+
+State 8
+
+    2 expr: expr . LAND expr
+    3     | expr . LOR expr
+    4     | expr . XOR expr
+    5     | NOT expr .
+
+    $default  reduce using rule 5 (expr)
+
+
+State 9
+
+    2 expr: expr . LAND expr
+    3     | expr . LOR expr
+    4     | expr . XOR expr
+    6     | '(' expr . ')'
+
+    LAND  shift, and go to state 11
+    LOR   shift, and go to state 12
+    XOR   shift, and go to state 13
+    ')'   shift, and go to state 15
+
+
+State 10
+
+    0 $accept: program $end .
+
+    $default  accept
+
+
+State 11
+
+    2 expr: expr LAND . expr
+
+    TRUE   shift, and go to state 1
+    FALSE  shift, and go to state 2
+    NOT    shift, and go to state 3
+    '('    shift, and go to state 4
+
+    expr  go to state 16
+    bool  go to state 7
+
+
+State 12
+
+    3 expr: expr LOR . expr
+
+    TRUE   shift, and go to state 1
+    FALSE  shift, and go to state 2
+    NOT    shift, and go to state 3
+    '('    shift, and go to state 4
+
+    expr  go to state 17
+    bool  go to state 7
+
+
+State 13
+
+    4 expr: expr XOR . expr
+
+    TRUE   shift, and go to state 1
+    FALSE  shift, and go to state 2
+    NOT    shift, and go to state 3
+    '('    shift, and go to state 4
+
+    expr  go to state 18
+    bool  go to state 7
+
+
+State 14
+
+    1 program: expr '.' .
+
+    $default  reduce using rule 1 (program)
+
+
+State 15
+
+    6 expr: '(' expr ')' .
+
+    $default  reduce using rule 6 (expr)
+
+
+State 16
+
+    2 expr: expr . LAND expr
+    2     | expr LAND expr .
+    3     | expr . LOR expr
+    4     | expr . XOR expr
+
+    $default  reduce using rule 2 (expr)
+
+
+State 17
+
+    2 expr: expr . LAND expr
+    3     | expr . LOR expr
+    3     | expr LOR expr .
+    4     | expr . XOR expr
+
+    LAND  shift, and go to state 11
+
+    $default  reduce using rule 3 (expr)
+
+
+State 18
+
+    2 expr: expr . LAND expr
+    3     | expr . LOR expr
+    4     | expr . XOR expr
+    4     | expr XOR expr .
+
+    LAND  shift, and go to state 11
+    LOR   shift, and go to state 12
+
+    $default  reduce using rule 4 (expr)
