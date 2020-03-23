@@ -1,7 +1,7 @@
 
 (RPS and Bool need flex/bison, operators needs python3)
 
-##RPS
+### RPS
 Program reads a file in the format:
 `
 rock rock;
@@ -12,7 +12,7 @@ and determines for each round, which one wins.
 to build, run `make`. To run, run `./rps < test.txt`.
 
 
-##Operators
+### Operators
 this program should run on ilab when run as the following:
 
 python3 parser.py INPUTSTRING
@@ -25,6 +25,6 @@ this will run it on the input string contained in test.txt
 
 
 
-#Bool
+### Bool
 make
 ./rps < test2.txt
